@@ -1,20 +1,43 @@
-<h2>Productos</h2>
-<ul>
-	
-<% @products.each do |prod| %>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-10 border border-primary offset-1">
+			<h1 class="display-4">Productos</h1>
+			<a class="btn btn-primary" href=<%= new_product_path %> role="button">Nuevo Producto</a>
+			<table class="table table-striped mt-3">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Precio</th>
+			      <th scope="col">Categorías</th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    
+		    	<% @products.each do |prod| %>
+			    <tr>
+		    		<th><%= prod.name %></th>
+		    		<td>$ <%= prod.price %></td>
+		    		<td><% prod.category_ids.each do |id| %>
 
-	<li><%= prod.name %> a $ <%= prod.price %></li>
+		    				<%= @category.find(id).name %> 
 
-	<%= link_to 'Show', product_path(prod) %>
-    <%= link_to 'Edit', edit_product_path(prod) %>
-    <%= link_to 'Destroy', product_path(prod), method: :delete, data: { confirm: 'Are you sure?' } %>
+		    			<% end %>
+		    		</td>
+		    		<td>
+		    	    <%= link_to 'Editar', edit_product_path(prod) %> 
+		    	    <%= link_to 'Eliminar', product_path(prod), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+		    	    </td>
+			    			
+			    </tr>		
+		    	<% end %>
+			    
 
-		<% prod.category_ids.each do |id| %>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
-			<%= @category.find(id).name %> 
 
-		<% end %>
-	
-<% end %>
 
-</ul>
