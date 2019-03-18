@@ -1,0 +1,20 @@
+<h2>Productos</h2>
+<ul>
+	
+<% @products.each do |prod| %>
+
+	<li><%= prod.name %> a $ <%= prod.price %></li>
+
+	<%= link_to 'Show', product_path(prod) %>
+    <%= link_to 'Edit', edit_product_path(prod) %>
+    <%= link_to 'Destroy', product_path(prod), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+		<% prod.category_ids.each do |id| %>
+
+			<%= @category.find(id).name %> 
+
+		<% end %>
+	
+<% end %>
+
+</ul>

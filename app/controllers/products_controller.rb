@@ -1,6 +1,23 @@
 class ProductsController < ApplicationController
+
+	def index
+		@products = Product.all
+		@category = Category.all
+	end
+
+	def show
+		@product = Product.find(params[:id])
+		@category = Category.all
+	end
+
 	def new
 		@product = Product.new
+		@category = Category.all
+	end
+
+	def edit
+		@product = Product.find(params[:id])
+		@category = Category.all
 	end
 
 	def create
@@ -11,6 +28,23 @@ class ProductsController < ApplicationController
 		else
 			render :new
 		end
+	end
+
+	def update
+		@product = Product.find(params[:id])
+
+		if @product.update(product_params)
+			redirect_to @product
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		@product = Product.find(params[:id])
+		@product.destroy
+		
+		redirect_to products_path
 	end
 
 	private

@@ -1,9 +1,20 @@
-<%= form_with model: @product, local: true do |form| %>
+<%= form_for (@product) do |form| %>
  
   <p>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
   </p>
+
+    <p>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %>
+  </p>
+
+  <% @category.each do |category| %>
+  	<%= hidden_field_tag "product[category_ids][]", nil %>		<!-- Para el mismo NOMBRE cargo un NIL que borra reinicializa todos los valores del checkbox. La idea es que como el checkbox solo envia los checked, pues si quito alguno, que ese que quite ya este apagado y la forma solo envia los que quedan chequeados.-->
+  	<%= check_box_tag "product[category_ids][]", category.id, @product.category_ids.include?(category.id) %>	<!-- @product.category_ids es un arreglo con todas las categorias del producto, y quiero saber si en ese arreglo se encuentra (category.id, que es el que estoy barriendo en el ciclo) -->
+  	<%= category.name %><br>
+  <% end %>
  
   <p>
     <%= form.submit %>
