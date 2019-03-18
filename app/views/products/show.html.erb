@@ -1,17 +1,28 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @product.name %>
-</p>
- 
-<p>
-  <strong>Precio:</strong>
-  <%= @product.price %>
-</p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 offset-2">
+			<p>
+			  <strong>Nombre:</strong>
+			  <%= @product.name %>
+			</p>
+			 
+			<p>
+			  <strong>Precio:</strong>
+			  <%= @product.price %>
+			</p>
 
-<strong>Categorias</strong>
-<br>
-<% @product.category_ids.each do |id| %>
-	<%= @category.find(id).name %><br>
-<% end %>
+			<strong>Categorias</strong>
+			<br>
+			<% @product.category_ids.each do |id| %>
+				<%= @category.find(id).name %><br>
+			<% end %>
 
-<%= link_to 'Volver a productos', products_path %>
+			<%= link_to 'Volver a productos', products_path %>
+			
+		</div>
+	</div>
+</div>
+
+
+
+
